@@ -27,7 +27,7 @@ At its base, R works like a calculator. So you can type 2+2 in the console and h
 You can assign values to a variable and then have R priont that value 
 ```
 x <- 2
-x' 
+x 
 ```
 And you can assign a series of values to a variable to create a vector 
 ```
@@ -122,4 +122,43 @@ breaks_map <- leaflet() %>%
 
 breaks_map
 ```
+# Working with existing data 
+Start a new RStudio session
 
+Under FILE, create new project
+
+Browse to convenient place to create (and leave) your project
+
+Name project, which creates new folder inside your directory
+
+Create folder inside the new project folder called "data"
+
+Download https://drive.google.com/file/d/1QaOHeFYLzT8uEIJmlSSA9o6_e7eN_VmL/view?usp=sharing and move the CSV into the data folder 
+
+Import data and assign it the name "voters"
+```
+library(readr)
+texasvoters <- read_csv("data/texasvoters.csv")
+head(texasvoters)
+```
+Let's plot the propotion of Spanish named voters with the propotion of the Democratic vote
+
+Install packages associated libraries for modeling and load those libraries (tidyverse packages already installed)
+```
+library(tidyverse)
+library(ggplot2)
+library(modelr)
+library(broom)
+```
+Now let's do a basic plot 
+```
+ggplot(texasvoters, aes(x=SpanishVotersProp, y=DEMprop)) +
+  geom_point(size=2, color="blue") +
+  geom_smooth(method = "lm", color="red") +
+  scale_x_continuous(limits=c(0,1), breaks=seq(0,.5,1)) +
+  scale_y_continuous(limits=c(0,1), breaks=seq(0,.5,1))
+```
+Now we can estimating the parameters using a simple linear model
+```
+votermodel <- lm(DEMprop ~ SpanishVotersProp, data = texasvoters)
+```
