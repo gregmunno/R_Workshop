@@ -7,21 +7,10 @@ Download and install R at https://cran.case.edu/
 Download and install RStudio https://www.rstudio.com/products/rstudio/download/ . Not to make sure you install R first, then R Studio 
 
 ## What is R?
-R is a programing language that specializes in statistical analysis and the plotting of data. Written mostly in C and in R itself, it first appeared in 1993. It is free and open source, and is a top choice for data scientists and academic researchers, and also popular in newsrooms. Developers have created a rich repository of "packages" for R, which create new funtionality and even a different way of writing code than Base R. These packages have expanded R's usability to include things like data scrapping, textual analysis, and interactive graphics. 
+R is a programing language that specializes in statistical analysis and the plotting of data. Written mostly in C and in R itself, it first appeared in 1993. It is free and open source, and is a top choice for data scientists and academic researchers, and also popular in newsrooms. Developers have created a rich repository of "packages" for R, which create new funtionality and even a different vocabulary for writing code than Base R. These packages have expanded R's usability to include things like data scrapping, textual analysis, and interactive graphics. 
 
 ## What is RStudio?
 RStudio is an interactive development environment for R. 
-
-## Why R?
-Capable of handling larger data than Excel
-
-Can interact in real time with APIs for constantly update data (think stock market charts on a digital news site) 
-
-Free and open source with a large community contributing to the development of new tools all the time. 
-
-Gold standard in terms of creating a reproducible transcript of your data work with all kinds of benefits for collaboration, documentation, transparency, and crowd-sourcing. 
-
-Powerful markdown options for publishing to the web. 
 
 ## RStudio -- A closer look
 In RStudio you generally have four panes -- one to write your scripts (Source), one where your scripts are excuted (Console), one where your data is stored (Environment) and one to navigate to files, visualize data, etc.) You can customize the layout and appearance under "Tools > Global Settings"
@@ -58,7 +47,20 @@ install.packages("leaflet")
 
 install.packages("ggplot2")
 ```
-Now we load the packages to activite them
+## Why R?
+While our packages are loading we can talk about the advantages of R.
+
+Capable of handling larger data than Excel
+
+Can interact in real time with APIs for constantly update data (think stock market charts on a digital news site) 
+
+Free and open source with a large community contributing to the development of new tools all the time. 
+
+Gold standard in terms of creating a reproducible transcript of your data work with all kinds of benefits for collaboration, documentation, transparency, and crowd-sourcing. 
+
+Powerful markdown options for publishing to the web. 
+
+Now that our packages have installed, we load them to activite
 ```
 library(dplyr)
 library(jsonlite)
@@ -66,6 +68,8 @@ library(leaflet)
 library(ggplot2)
 ```
 Note that "dplyr" is a sub-library of the tidyverse and that together with ggplot are the most commonly used packages in the data journalism space. 
+
+There is extensive documentation on all these packages that teach you how to manipulate data within those packages' ecosystems. For instance: https://dplyr.tidyverse.org/ 
 
 Now we connect to the API
 ```
