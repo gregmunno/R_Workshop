@@ -65,6 +65,8 @@ library(jsonlite)
 library(leaflet)
 library(ggplot2)
 ```
+Note that "dplyr" is a sub-library of the tidyverse and that together with ggplot are the most commonly used packages in the data journalism space. 
+
 Now we connect to the API
 ```
 url <- "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Water_Main_Breaks/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
@@ -80,7 +82,17 @@ Creating the background map
 breaks_map <- leaflet() %>% addTiles() %>% setView(lng = -76.1455, lat = 43.0493, zoom = 12)
 breaks_map
 ```
-Next, we add all of the incidents as points to the map. We’ll also change the basemap, so you can see some of other map styles offered. Try playing around with the "color," “radius”, “fillcolor”, and “fillopacity” parameters to get the markers that you think look best.
+We can generate any  background map simply by changing the longitude and latitude. For instance:
+```
+breaks_map <- leaflet() %>% addTiles() %>% setView(lng = -73.9712, lat = 40.7831, zoom = 12)
+breaks_map
+```
+Now back to Syracuse:
+```
+breaks_map <- leaflet() %>% addTiles() %>% setView(lng = -76.1455, lat = 43.0493, zoom = 12)
+breaks_map
+```
+Next, we add all of the incidents as points to the map and change the basemap style to toner. We’ll also change the basemap, so you can see some of other map styles offered. Try playing around with the "color," “radius”, “fillcolor”, and “fillopacity” parameters to get the markers that you think look best.
 ```
 data2$popup <- paste("Date: ", data2$weekday, ", ", data2$month, "/", data2$date, " Location: ", data$location ,sep = "")
 
@@ -90,3 +102,20 @@ breaks_map <- leaflet() %>%
 
 breaks_map
 ```
+Now we can play with different basemap styles. For instance:
+```
+breaks_map <- leaflet() %>%
+  addProviderTiles(providers$Esri.NatGeoWorldMap) %>% 
+  addCircles(lng=data2$lon, lat=data2$lat, popup = data2$popup, radius = 50, color = "red")
+
+breaks_map
+```
+This one is kind of neat, and let's us play with color too: 
+```
+breaks_map <- leaflet() %>%
+  addProviderTiles("Stamen.Watercolor") %>%
+  addCircles(lng=data2$lon, lat=data2$lat, popup = data2$popup, radius = 50, color = "blue")
+
+breaks_map
+```
+
