@@ -19,7 +19,9 @@ Useful keyboard shortcuts can be found at https://support.rstudio.com/hc/en-us/a
 
 RUN Code - Ctrl+Enter
 Insert PIPE opperator (%) - Ctrl+Shift+M
+
 Insert ASSIGNMENT operator (<-) -	Alt+- (Windows)	Option+- (Mac) 
+
 Clear Console - CTRL+L
 
 At its base, R works like a calculator. So you can type 2+2 in the console and hit return and get 4, or you type 2-2 in scripting pane, click run (or control click), and the result will again appear in the console. 
