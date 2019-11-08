@@ -158,7 +158,15 @@ ggplot(texasvoters, aes(x=SpanishVotersProp, y=DEMprop)) +
   scale_x_continuous(limits=c(0,1), breaks=seq(0,.5,1)) +
   scale_y_continuous(limits=c(0,1), breaks=seq(0,.5,1))
 ```
-Now we can estimating the parameters using a simple linear model
+Now we can estimate the parameters using a simple linear model
 ```
 votermodel <- lm(DEMprop ~ SpanishVotersProp, data = texasvoters)
+summary(votermodel)
 ```
+It is showing use that the relationship between the number of Spanish surnamed voters and the Democratic vote is significant (the p value). 
+
+R-squared (R2) is a statistical measure that represents the proportion of the variance for a dependent variable that's explained by an independent variable or variables in a regression model. In this case, about a third of the variance. 
+
+The estimate is the beta, or slope, of the line, in the formula Y= a + bX, where Y is the dependent variable (that's the variable that goes on the Y axis), X is the independent variable (i.e. it is plotted on the X axis), b is the slope of the line and a is the y-intercept.
+
+So in this example Y (Democratic vote) = .48X (Spanish voters) + .15. So by knowing either X or Y, we can estimate the other. 
