@@ -50,7 +50,7 @@ y
 
 Install each package individually by pressing "Run" or command/control enter when on that line.
 ```
-install.packages("dplyr")
+install.packages("tidyverse")
 
 install.packages("jsonlite")
 
