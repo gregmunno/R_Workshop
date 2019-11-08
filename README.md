@@ -34,8 +34,8 @@ Insert ASSIGNMENT operator (<-) -	Alt+- (Windows)	Option+- (Mac)
 At its base, R works like a calculator. So you can type 2+2 in the console and hit return and get 4, or you type 2-2 in scripting pane, click run (or control click), and the result will again appear in the console. 
 
 You can assign values to a variable and then have R priont that value 
-x <- 2
-x 
+'x <- 2
+x' 
 
 And you can assign a series of values to a variable to create a vector 
 y <- c(1,2,3,4)
