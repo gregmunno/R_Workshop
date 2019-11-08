@@ -27,9 +27,11 @@ Powerful markdown options for publishing to the web.
 In RStudio you generally have four panes -- one to write your scripts (Source), one where your scripts are excuted (Console), one where your data is stored (Environment) and one to navigate to files, visualize data, etc.) You can customize the layout and appearance under "Tools > Global Settings"
 
 Useful keyboard shortcuts can be found at https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts . Three that get used a lot are:
-RUN Code - Control Enter
+
+RUN Code - Ctrl+Enter
 Insert PIPE opperator (%) - Ctrl+Shift+M
 Insert ASSIGNMENT operator (<-) -	Alt+- (Windows)	Option+- (Mac) 
+Clear Console - CTRL+L
 
 At its base, R works like a calculator. So you can type 2+2 in the console and hit return and get 4, or you type 2-2 in scripting pane, click run (or control click), and the result will again appear in the console. 
 
@@ -43,5 +45,48 @@ And you can assign a series of values to a variable to create a vector
 y <- c(1,2,3,4)
 y 
 ```
-sd
 
+# Packages and visualizing city water main breaks 
+
+Install each package individually by pressing "Run" or command/control enter when on that line.
+```
+install.packages("dplyr")
+
+install.packages("jsonlite")
+
+install.packages("leaflet")
+
+install.packages("ggplot2")
+```
+Now we load the packages to activite them
+```
+library(dplyr)
+library(jsonlite)
+library(leaflet)
+library(ggplot2)
+```
+Now we connect to the API
+```
+url <- "https://services6.arcgis.com/bdPqSfflsdgFRVVM/arcgis/rest/services/Water_Main_Breaks/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json"
+jsondata <- fromJSON(url)
+```
+We are renaming the data as simply "data2", reducing the amount of information in the file, and asking it to display the variable names and first rows of data.
+```
+data2 <- jsondata$features$attributes
+head(data2)
+```
+Creating the background map
+```
+breaks_map <- leaflet() %>% addTiles() %>% setView(lng = -76.1455, lat = 43.0493, zoom = 12)
+breaks_map
+```
+Next, we add all of the incidents as points to the map. We’ll also change the basemap, so you can see some of other map styles offered. Try playing around with the "color," “radius”, “fillcolor”, and “fillopacity” parameters to get the markers that you think look best.
+```
+data2$popup <- paste("Date: ", data2$weekday, ", ", data2$month, "/", data2$date, " Location: ", data$location ,sep = "")
+
+breaks_map <- leaflet() %>%
+  addProviderTiles("Stamen.Toner") %>%
+  addCircles(lng=data2$lon, lat=data2$lat, popup = data2$popup, radius = 50, color = "red")
+
+breaks_map
+```
